@@ -188,8 +188,9 @@
           <style>
             .values-section {
               height: 90vh;
-              overflow: hidden;
+              overflow: visible;
               position: relative;
+              background: white;
             }
 
             .values-left {
@@ -209,7 +210,6 @@
               font-size: clamp(3rem, 8vw, 7rem);
               margin: 0;
               text-align: right;
-              transition: transform 0.1s ease-out;
               will-change: transform;
             }
 
@@ -231,7 +231,7 @@
               margin-bottom: clamp(1.25rem, 3.2vw, 2rem);
               opacity: 0.3;
               color: black;
-              transition: opacity 0.3s ease;
+              transition: opacity 0.5s ease;
             }
 
             /* .values-list li.active {
@@ -265,7 +265,7 @@
               position: relative;
             }
             .we-are-cw-img {
-              background-image: url("heritage_hero_cover.CFTdkGNQ.jpg");
+              background-image: url("about-community.jpg");
               background-size: cover;
               background-position: center;
               background-repeat: no-repeat;
@@ -277,6 +277,7 @@
               top: 50%;
               left: 50%;
               width: 900px;
+              color: white;
               transform: translate(-50%, -50%);
               position: absolute;
             }
@@ -918,79 +919,79 @@
       });
     </script>
     <script>
+      gsap.registerPlugin(ScrollTrigger);
+
       const wereText = document.getElementById("wereText");
-      const valuesSection = document.querySelector(".values-section");
       const valuesList = document.querySelectorAll(".values-list li");
       const valuesRight = document.querySelector(".values-right");
+      const lastValue = document.getElementById("lastValue");
 
-      let ticking = false;
+      // Calculate the total scroll distance
+      const maxTranslate = valuesRight.offsetHeight - 300;
 
-      function updateAnimation() {
-        const sectionRect = valuesSection.getBoundingClientRect();
-        const valuesRightRect = valuesRight.getBoundingClientRect();
-        const viewportHeight = window.innerHeight;
+      // Main animation for "we're" text with slower, smoother movement
+      gsap.to(wereText, {
+        y: maxTranslate,
+        ease: "power1.inOut",
+        scrollTrigger: {
+          trigger: ".values-section",
+          start: "top center",
+          end: () => `+=${valuesRight.offsetHeight}`,
+          scrub: 1.5, // Higher value = smoother, slower movement
+          pin: false,
+        },
+      });
 
-        // Start animation when "builders" (first item) enters viewport
-        const firstItemTop = valuesList[0].getBoundingClientRect().top;
-        const lastItemBottom =
-          valuesList[valuesList.length - 1].getBoundingClientRect().bottom;
+      // Individual animations for each list item
+      valuesList.forEach((item, index) => {
+        const isLast = index === valuesList.length - 1;
 
-        // Calculate scroll range from first item to last item
-        const scrollStart = firstItemTop - viewportHeight / 2;
-        const scrollEnd = lastItemBottom - viewportHeight / 2;
-        const scrollRange = Math.abs(scrollEnd - scrollStart);
+        ScrollTrigger.create({
+          trigger: item,
+          start: "top center+=100",
+          end: isLast ? "bottom center-=200" : "bottom center+=100",
+          scrub: 0.5,
+          onUpdate: (self) => {
+            // Smooth fade in/out based on progress
+            const progress = self.progress;
+            let opacity;
 
-        // Calculate progress based on items visibility
-        let scrollProgress = 0;
-        if (firstItemTop < viewportHeight / 2) {
-          const currentScroll = viewportHeight / 2 - firstItemTop;
-          scrollProgress = Math.max(
-            0,
-            Math.min(1, currentScroll / scrollRange)
-          );
-        }
+            if (isLast) {
+              // Last item stays active longer
+              opacity = progress < 0.3 ? progress / 0.1 : 1;
+            } else {
+              // Other items fade in and out
+              if (progress < 0.1) {
+                opacity = progress * 2;
+              } else {
+                opacity = (1 - progress) * 2;
+              }
+            }
 
-        // Smooth easing function for more natural movement
-        const easeProgress =
-          scrollProgress < 0.5
-            ? 2 * scrollProgress * scrollProgress
-            : 1 - Math.pow(-2 * scrollProgress + 2, 2) / 2;
-
-        // Move text down smoothly
-        const maxTranslate = valuesRightRect.height - 200;
-        const translateY = easeProgress * maxTranslate;
-        wereText.style.transform = `translateY(${translateY}px)`;
-
-        // Highlight active value with smoother transitions
-        valuesList.forEach((item, index) => {
-          const itemTop = item.getBoundingClientRect().top;
-          const itemCenter = itemTop + item.offsetHeight / 2;
-          const viewportCenter = viewportHeight / 2;
-
-          // Item is active when it's near the center of viewport
-          if (Math.abs(itemCenter - viewportCenter) < 150) {
-            item.classList.add("active");
-          } else {
-            item.classList.remove("active");
-          }
+            gsap.to(item, {
+              opacity: Math.max(0.1, Math.min(0.3, opacity)),
+              duration: 0.3,
+            });
+          },
+          onEnter: () => item.classList.add("active"),
+          onLeave: () => {
+            if (!isLast) item.classList.remove("active");
+          },
+          onEnterBack: () => item.classList.add("active"),
+          onLeaveBack: () => item.classList.remove("active"),
         });
+      });
 
-        ticking = false;
-      }
-
-      // Optimized scroll handler with requestAnimationFrame
-      function onScroll() {
-        if (!ticking) {
-          window.requestAnimationFrame(updateAnimation);
-          ticking = true;
-        }
-      }
-
-      // Update on scroll
-      window.addEventListener("scroll", onScroll, { passive: true });
-
-      // Initial update
-      updateAnimation();
+      // Ensure last item stays active and "we're" stays aligned
+      ScrollTrigger.create({
+        trigger: lastValue,
+        start: "center center",
+        end: "bottom top",
+        onEnter: () => {
+          lastValue.classList.add("active");
+          gsap.to(lastValue, { opacity: 0.1, duration: 0.3 });
+        },
+      });
     </script>
     <script>
       gsap.registerPlugin(ScrollTrigger);
@@ -1010,6 +1011,7 @@
         });
       });
     </script>
+    <!-- img animation -->
     <script>
       gsap.registerPlugin(ScrollTrigger);
 
