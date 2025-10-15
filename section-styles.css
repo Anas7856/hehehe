@@ -1,0 +1,397 @@
+/* ------------------------------------------------*/
+/* KEEP        
+/* ------------------------------------------------*/
+/* ——— jobs‑section.css ——— */
+
+/* 1. Layout & Containers */
+.preJerbsSection,
+.jerbs {
+  position: relative;
+  width: 100%;
+  min-width: 360px;
+}
+.jerbs {
+  overscroll-behavior: contain;
+  scroll-behavior: auto !important;
+}
+
+
+.jerbs-container {
+  position: relative;
+  width: 100%;
+  max-width: 1920px;
+  padding: 0 3rem;
+  margin: 0 auto;
+}
+.jerbs-container.grid-container {
+  padding: 0 1.5rem;
+}
+@media (min-width: 768px) {
+  .jerbs-container {
+    padding: 0 6rem;
+  }
+  .jerbs-container.grid-container {
+    padding: 0 4.5rem;
+  }
+}
+@media (min-width: 1600px) {
+  .jerbs-container {
+    padding: 0 9rem;
+  }
+  .jerbs-container.grid-container {
+    padding: 0 7.5rem;
+  }
+}
+
+/* 2. Section Title / Headline */
+.jerbs-title {
+  display: flex;
+  flex-direction: column;
+  gap: 3.4rem;
+  text-align: left;
+  margin-bottom: 7rem;
+}
+.jerbs-headline {
+  margin-bottom: 6.2rem;
+}
+@media (min-width: 768px) {
+  .jerbs-title {
+    margin-bottom: 8rem;
+  }
+  .jerbs-headline {
+    margin-bottom: 6.6rem;
+  }
+}
+@media (min-width: 1200px) {
+  .jerbs-title {
+    margin-bottom: 6.7rem;
+  }
+  .jerbs-headline {
+    margin-bottom: 0;
+  }
+}
+@media (min-width: 1600px) {
+  .jerbs-title {
+    gap: 0.2rem;
+    margin-bottom: 0.7rem;
+  }
+}
+.jerbs-title p {
+  font-size: 0.6rem;
+  margin-top: 0.2rem;
+}
+@media (min-width: 1600px) {
+  .jerbs-title p {
+    font-size: 0.8rem;
+  }
+}
+
+/* 3. Pinned Layout / Scrolling Columns */
+
+
+.pinned-universal-static {
+  /* Allow GSAP pinning */
+  will-change: transform;
+}
+
+.pinned-universal-scroll {
+  height: auto !important;
+  overflow: visible;
+}
+
+.pinned-universal {
+  height: auto !important;
+  position: relative;
+  overflow: visible;
+}
+.static-inner {
+  text-align: center;
+}
+@media (min-width: 1200px) {
+  .static-inner {
+    position: sticky;
+    top: 0;
+    padding-top: 6rem;
+    text-align: left;
+  }
+}
+@media (min-width: 1600px) {
+  .static-inner {
+    padding-top: 9rem;
+  }
+}
+@media (min-width: 1200px) {
+  .pinned-universal-scroll {
+    padding-top: 6rem;
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    gap: 1.2rem;
+  }
+}
+@media (min-width: 1600px) {
+  .pinned-universal-scroll {
+    padding-top: 9rem;
+  }
+}
+.pinned-universal-scroll .scroll-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 6.5rem;
+}
+@media (min-width: 768px) {
+  .pinned-universal-scroll .scroll-inner {
+    gap: 7.5rem;
+  }
+}
+@media (min-width: 1600px) {
+  .pinned-universal-scroll .scroll-inner {
+    gap: 9.3rem;
+  }
+}
+
+/* 4. Grid Items (Reusable Blocks) */
+.jerbs-grid-item,
+.jerbs-grid-item-l {
+  padding: 0 1.5rem;
+  margin-top: 3rem;
+}
+.jerbs-grid-item.no-margin,
+.jerbs-grid-item-l.no-margin {
+  margin: 0;
+}
+.jerbs-grid-item.no-margin-desktop {
+  margin-top: 3rem;
+}
+@media (min-width: 1200px) {
+  .jerbs-grid-item.no-margin-desktop {
+    margin: 0;
+  }
+  .jerbs-grid-item-l {
+    padding: 0 3rem;
+  }
+}
+
+/* 5. Job Posts / Resume List */
+.jerbs-list {
+  position: relative;
+}
+@media (min-width: 1200px) and (hover) and (prefers-reduced-motion: no-preference) {
+  .jerbs-list > .jerbs-item {
+    transition: opacity 0.3s ease;
+  }
+  .jerbs-list:hover > .jerbs-item:not(:hover) {
+    opacity: 0.2;
+  }
+}
+.jerbs-item {
+  position: relative;
+  display: block;
+  margin-top: -2px;
+}
+.jerbs-item:first-of-type {
+  margin-top: 0;
+}
+.jerbs-divider {
+  width: 100%;
+  height: 2px;
+  background-color: var(--st-bright);
+}
+.jerbs-content {
+  position: relative;
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: space-between;
+  padding: 3.6rem 4rem 3.5rem;
+  margin: 4rem 0 7rem 0;
+  border: 1px solid #8899fa;
+  border-radius: 14px;
+  background: aliceblue;
+  overflow: hidden;
+}
+@media (min-width: 1200px) {
+  .jerbs-content {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+.jerbs-data {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+@media (min-width: 1200px) {
+  .jerbs-data {
+    gap: 1.2rem;
+  }
+}
+
+/*
+ 6. Metadata 
+.jerbs-list__year {
+  margin-bottom: 1.1rem;
+}
+.jerbs-list__year p {
+  font-weight: var(--fw-medium);
+  color: var(--t-bright);
+}
+*/
+/*************************************************
+/* We are builders
+/*************************************************/
+
+.weAre {
+  position: relative;
+  width: 100%;
+  min-width: 360px;
+  overscroll-behavior: contain;
+  scroll-behavior: auto !important;
+}
+
+
+.weAre-container {
+  position: relative;
+  width: 100%;
+  max-width: 1920px;
+  padding: 0 3rem;
+  margin: 0 auto;
+}
+.weAre-container.grid-container {
+  padding: 0 1.5rem;
+}
+@media (min-width: 768px) {
+  .weAre-container {
+    padding: 0 6rem;
+  }
+  .weAre-container.grid-container {
+    padding: 0 4.5rem;
+  }
+}
+@media (min-width: 1600px) {
+  .weAre-container {
+    padding: 0 9rem;
+  }
+  .weAre-container.grid-container {
+    padding: 0 7.5rem;
+  }
+}
+
+/* 2. Section Title / Headline */
+.weAre-title {
+  display: flex;
+  flex-direction: column;
+  gap: 3.4rem;
+  text-align: right;
+  margin-bottom: 7rem;
+}
+.weAre-headline {
+  margin-bottom: 6.2rem;
+}
+@media (min-width: 768px) {
+  .weAre-title {
+    margin-bottom: 8rem;
+  }
+  .weAre-headline {
+    margin-bottom: 6.6rem;
+  }
+}
+@media (min-width: 1200px) {
+  .weAre-title {
+    margin-bottom: 6.7rem;
+  }
+  .weAre-headline {
+    margin-bottom: 0;
+  }
+}
+@media (min-width: 1600px) {
+  .weAre-title {
+    gap: 0.2rem;
+    margin-bottom: 0.7rem;
+  }
+}
+.weAre-title p {
+  font-size: 0.6rem;
+  margin-top: 0.2rem;
+}
+@media (min-width: 1600px) {
+  .weAre-title p {
+    font-size: 0.8rem;
+  }
+}
+
+/* 4. Grid Items (Reusable Blocks) */
+.weAre-grid-item,
+.weAre-grid-item-l {
+  padding: 0 1.5rem;
+  margin-top: 3rem;
+}
+.weAre-grid-item.no-margin,
+.weAre-grid-item-l.no-margin {
+  margin: 0;
+}
+.weAre-grid-item.no-margin-desktop {
+  margin-top: 3rem;
+}
+@media (min-width: 1200px) {
+  .weAre-grid-item.no-margin-desktop {
+    margin: 0;
+  }
+  .weAre-grid-item-l {
+    padding: 0 3rem;
+  }
+}
+
+/* 5. Job Posts / Resume List */
+.weAre-list {
+  position: relative;
+}
+@media (min-width: 1200px) and (hover) and (prefers-reduced-motion: no-preference) {
+  .weAre-list > .weAre-item {
+    transition: opacity 0.3s ease;
+  }
+  .weAre-list:hover > .weAre-item:not(:hover) {
+    opacity: 0.2;
+  }
+}
+.weAre-item {
+  position: relative;
+  display: block;
+  margin-top: -2px;
+}
+.weAre-item:first-of-type {
+  margin-top: 0;
+}
+.weAre-divider {
+  width: 100%;
+  height: 2px;
+  background-color: var(--st-bright);
+}
+.weAre-content {
+  position: relative;
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: space-between;
+  padding: 3.6rem 4rem 3.5rem;
+  margin: 4rem 0 7rem 0;
+  border: 1px solid #8899fa;
+  border-radius: 14px;
+  background: aliceblue;
+  overflow: hidden;
+}
+@media (min-width: 1200px) {
+  .weAre-content {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+.weAre-data {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+@media (min-width: 1200px) {
+  .weAre-data {
+    gap: 1.2rem;
+  }
+}

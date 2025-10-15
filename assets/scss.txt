@@ -1,0 +1,1 @@
+sass --watch "C:\Users\Admin\Dropbox\Harun Pure\main-exdos\exdos\assets\scss\main.scss":"C:\Users\Admin\Dropbox\Harun Pure\main-exdos\exdos\assets\css\style.css"
